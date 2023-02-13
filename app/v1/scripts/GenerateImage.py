@@ -52,11 +52,9 @@ class GenerateImage:
             for artifact in resp.artifacts: 
                 if artifact.finish_reason == generation.FILTER:
                     return False
-                    
+
                 if artifact.type == generation.ARTIFACT_IMAGE:
-                    img = Image.open(io.BytesIO(artifact.binary))
                     images.append( base64.b64encode( artifact.binary ).decode() )
-                    img.save(str(artifact.seed)+ ".png") # Save our generated images with their seed number as the filename.
         
         return images
 
